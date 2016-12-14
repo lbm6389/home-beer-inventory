@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.breweryLabel = new System.Windows.Forms.Label();
-            this.BreweryComboBox = new System.Windows.Forms.ComboBox();
+            this.breweryComboBox = new System.Windows.Forms.ComboBox();
             this.beerNameLabel = new System.Windows.Forms.Label();
             this.beerNameComboBox = new System.Windows.Forms.ComboBox();
             this.vintageLabel = new System.Windows.Forms.Label();
@@ -48,10 +48,6 @@
             this.tradeQuantityLabel = new System.Windows.Forms.Label();
             this.purchasePriceTextBox = new System.Windows.Forms.TextBox();
             this.purchasePriceLabel = new System.Windows.Forms.Label();
-            this.enjoymentLabel = new System.Windows.Forms.Label();
-            this.enjoyNowRadioButton = new System.Windows.Forms.RadioButton();
-            this.enjoyOneYearRadioButton = new System.Windows.Forms.RadioButton();
-            this.enjoyAnnuallyRadioButton = new System.Windows.Forms.RadioButton();
             this.addBeerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -64,13 +60,13 @@
             this.breweryLabel.TabIndex = 0;
             this.breweryLabel.Text = "Brewery:";
             // 
-            // BreweryComboBox
+            // breweryComboBox
             // 
-            this.BreweryComboBox.FormattingEnabled = true;
-            this.BreweryComboBox.Location = new System.Drawing.Point(101, 37);
-            this.BreweryComboBox.Name = "BreweryComboBox";
-            this.BreweryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.BreweryComboBox.TabIndex = 1;
+            this.breweryComboBox.FormattingEnabled = true;
+            this.breweryComboBox.Location = new System.Drawing.Point(101, 37);
+            this.breweryComboBox.Name = "breweryComboBox";
+            this.breweryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.breweryComboBox.TabIndex = 1;
             // 
             // beerNameLabel
             // 
@@ -222,48 +218,6 @@
             this.purchasePriceLabel.TabIndex = 18;
             this.purchasePriceLabel.Text = "Purchase Price:";
             // 
-            // enjoymentLabel
-            // 
-            this.enjoymentLabel.AutoSize = true;
-            this.enjoymentLabel.Location = new System.Drawing.Point(19, 258);
-            this.enjoymentLabel.Name = "enjoymentLabel";
-            this.enjoymentLabel.Size = new System.Drawing.Size(36, 13);
-            this.enjoymentLabel.TabIndex = 20;
-            this.enjoymentLabel.Text = "Enjoy:";
-            // 
-            // enjoyNowRadioButton
-            // 
-            this.enjoyNowRadioButton.AutoSize = true;
-            this.enjoyNowRadioButton.Location = new System.Drawing.Point(91, 258);
-            this.enjoyNowRadioButton.Name = "enjoyNowRadioButton";
-            this.enjoyNowRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.enjoyNowRadioButton.TabIndex = 21;
-            this.enjoyNowRadioButton.TabStop = true;
-            this.enjoyNowRadioButton.Text = "Now";
-            this.enjoyNowRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // enjoyOneYearRadioButton
-            // 
-            this.enjoyOneYearRadioButton.AutoSize = true;
-            this.enjoyOneYearRadioButton.Location = new System.Drawing.Point(154, 258);
-            this.enjoyOneYearRadioButton.Name = "enjoyOneYearRadioButton";
-            this.enjoyOneYearRadioButton.Size = new System.Drawing.Size(82, 17);
-            this.enjoyOneYearRadioButton.TabIndex = 22;
-            this.enjoyOneYearRadioButton.TabStop = true;
-            this.enjoyOneYearRadioButton.Text = "Over a Year";
-            this.enjoyOneYearRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // enjoyAnnuallyRadioButton
-            // 
-            this.enjoyAnnuallyRadioButton.AutoSize = true;
-            this.enjoyAnnuallyRadioButton.Location = new System.Drawing.Point(245, 258);
-            this.enjoyAnnuallyRadioButton.Name = "enjoyAnnuallyRadioButton";
-            this.enjoyAnnuallyRadioButton.Size = new System.Drawing.Size(65, 17);
-            this.enjoyAnnuallyRadioButton.TabIndex = 23;
-            this.enjoyAnnuallyRadioButton.TabStop = true;
-            this.enjoyAnnuallyRadioButton.Text = "Annually";
-            this.enjoyAnnuallyRadioButton.UseVisualStyleBackColor = true;
-            // 
             // addBeerButton
             // 
             this.addBeerButton.Location = new System.Drawing.Point(126, 419);
@@ -280,10 +234,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 504);
             this.Controls.Add(this.addBeerButton);
-            this.Controls.Add(this.enjoyAnnuallyRadioButton);
-            this.Controls.Add(this.enjoyOneYearRadioButton);
-            this.Controls.Add(this.enjoyNowRadioButton);
-            this.Controls.Add(this.enjoymentLabel);
             this.Controls.Add(this.purchasePriceTextBox);
             this.Controls.Add(this.purchasePriceLabel);
             this.Controls.Add(this.tradeQuantityTextBox);
@@ -302,7 +252,7 @@
             this.Controls.Add(this.vintageLabel);
             this.Controls.Add(this.beerNameComboBox);
             this.Controls.Add(this.beerNameLabel);
-            this.Controls.Add(this.BreweryComboBox);
+            this.Controls.Add(this.breweryComboBox);
             this.Controls.Add(this.breweryLabel);
             this.Name = "AddBeer";
             this.Text = "Add Beer";
@@ -314,7 +264,7 @@
         #endregion
 
         private System.Windows.Forms.Label breweryLabel;
-        private System.Windows.Forms.ComboBox BreweryComboBox;
+        private System.Windows.Forms.ComboBox breweryComboBox;
         private System.Windows.Forms.Label beerNameLabel;
         private System.Windows.Forms.ComboBox beerNameComboBox;
         private System.Windows.Forms.Label vintageLabel;
@@ -333,10 +283,6 @@
         private System.Windows.Forms.Label tradeQuantityLabel;
         private System.Windows.Forms.TextBox purchasePriceTextBox;
         private System.Windows.Forms.Label purchasePriceLabel;
-        private System.Windows.Forms.Label enjoymentLabel;
-        private System.Windows.Forms.RadioButton enjoyNowRadioButton;
-        private System.Windows.Forms.RadioButton enjoyOneYearRadioButton;
-        private System.Windows.Forms.RadioButton enjoyAnnuallyRadioButton;
         private System.Windows.Forms.Button addBeerButton;
     }
 }

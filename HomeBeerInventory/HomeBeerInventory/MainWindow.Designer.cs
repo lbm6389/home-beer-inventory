@@ -34,6 +34,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewBeerDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToExistingDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createFromCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +63,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectToExistingDatabaseToolStripMenuItem,
             this.createNewBeerDatabaseToolStripMenuItem,
+            this.createFromCSVToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -88,6 +90,13 @@
             this.connectToExistingDatabaseToolStripMenuItem.Text = "Connect to Existing Database";
             this.connectToExistingDatabaseToolStripMenuItem.Click += new System.EventHandler(this.connectToExistingDatabaseToolStripMenuItem_Click);
             // 
+            // createFromCSVToolStripMenuItem
+            // 
+            this.createFromCSVToolStripMenuItem.Name = "createFromCSVToolStripMenuItem";
+            this.createFromCSVToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.createFromCSVToolStripMenuItem.Text = "Create from CSV";
+            this.createFromCSVToolStripMenuItem.Click += new System.EventHandler(this.createFromCSVToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +122,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createNewBeerDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectToExistingDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createFromCSVToolStripMenuItem;
     }
 }
 
