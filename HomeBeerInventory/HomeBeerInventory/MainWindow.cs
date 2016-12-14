@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using Microsoft.VisualBasic.FileIO;
 
 namespace HomeBeerInventory
 {
@@ -45,6 +46,8 @@ namespace HomeBeerInventory
 
         private void createNewBeerDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (databaseConnection.State == ConnectionState.Open)
+                CloseDatabase();
             SaveFileDialog databaseLocationDialog = new SaveFileDialog();
             databaseLocationDialog.Filter = "SQLite Database File|*.sqlite";
             DialogResult databaseLocationResult = databaseLocationDialog.ShowDialog();
@@ -93,6 +96,8 @@ namespace HomeBeerInventory
 
         private void connectToExistingDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (databaseConnection.State == ConnectionState.Open)
+                CloseDatabase();
             OpenFileDialog databaseLocationDialog = new OpenFileDialog();
             databaseLocationDialog.Filter = "SQLite Database File|*.sqlite";
             DialogResult databaseLocationResult = databaseLocationDialog.ShowDialog();
@@ -102,6 +107,42 @@ namespace HomeBeerInventory
                 Properties.Settings.Default.databaseLocation = databaseLocation;
                 Properties.Settings.Default.Save();
                 ConnectToDatabase();
+            }
+        }
+
+        private void createFromCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (databaseConnection.State == ConnectionState.Open)
+                CloseDatabase();
+            OpenFileDialog csvLocationDialog = new OpenFileDialog();
+            csvLocationDialog.Filter = "Comma Separated Values|*.csv";
+            DialogResult csvLocationResult = csvLocationDialog.ShowDialog();
+            if(csvLocationResult == DialogResult.OK)
+            {
+                createNewBeerDatabaseToolStripMenuItem_Click(sender, e);
+                TextFieldParser parser = new TextFieldParser(csvLocationDialog.FileName);
+                parser.SetDelimiters(",");
+                parser.ReadFields();
+                using (SQLiteConnection conn = new SQLiteConnection(string.Format("Data Source = {0};Version=3;", databaseLocation)))
+                {
+                    conn.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(conn))
+                    {
+                        using (var trans = conn.BeginTransaction())
+                        {
+                            while (!parser.EndOfData)
+                            {
+                                string[] currentRow = parser.ReadFields();
+                                string insertQry = string.Format("insert into BeerInventory select '{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}',{8},'{9}','{10}','{11}','{12}'", currentRow[0], currentRow[1], currentRow[2], currentRow[3], currentRow[4], currentRow[5], currentRow[6], currentRow[7], currentRow[8], currentRow[9], currentRow[10], currentRow[11], currentRow[12]);
+                                MessageBox.Show(currentRow[3].ToString());
+                                cmd.CommandText = insertQry;
+                                cmd.ExecuteNonQuery();
+                            }
+                            trans.Commit();
+                        }
+                    }
+                }
+
             }
         }
     }

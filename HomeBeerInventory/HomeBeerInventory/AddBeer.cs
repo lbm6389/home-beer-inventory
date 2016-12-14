@@ -22,6 +22,9 @@ namespace HomeBeerInventory
             databaseLocation = dbLoc;
             OpenConnection();
             InitializeBreweryComboBox();
+            InitializeIndexChangeHandlers();
+            //InitializeVintageComboBox();
+            //InitializeBeerStyleComboBox();
         }
 
         private void OpenConnection()
@@ -45,17 +48,81 @@ namespace HomeBeerInventory
         private void InitializeBreweryComboBox()
         {
             string breweriesQuery = "select distinct Brewery from BeerInventory";
-            SQLiteCommand breweriesCommand = new SQLiteCommand(breweriesQuery, databaseConnection);
-            SQLiteDataReader breweriesReader = breweriesCommand.ExecuteReader();
-            if (breweriesReader.HasRows)
+            using (SQLiteCommand breweriesCommand = new SQLiteCommand(breweriesQuery, databaseConnection))
             {
-                while (breweriesReader.Read())
+                SQLiteDataReader breweriesReader = breweriesCommand.ExecuteReader();
+                if (breweriesReader.HasRows)
                 {
-                    BreweryComboBox.Items.Add(breweriesReader.GetString(0));
+                    while (breweriesReader.Read())
+                    {
+                        breweryComboBox.Items.Add(breweriesReader.GetString(0));
+                    }
                 }
+                breweriesReader.Dispose();
             }
-            breweriesReader.Dispose();
-            breweriesCommand.Dispose();
+        }
+
+        private void InitializeIndexChangeHandlers()
+        {
+            this.breweryComboBox.SelectedIndexChanged += new EventHandler(BreweryNameChanged);
+        }
+
+        private void BreweryNameChanged(object sender, EventArgs e)
+        {
+            InitializeBeerNameComboBox();
+        }
+
+        private void InitializeBeerNameComboBox()
+        {
+            beerNameComboBox.Items.Clear();
+            beerNameComboBox.Text = string.Empty;
+            string beersQuery = string.Format("select distinct BeerName from BeerInventory where Brewery = '{0}'", breweryComboBox.Text);
+            using (SQLiteCommand beersCommand = new SQLiteCommand(beersQuery, databaseConnection))
+            {                
+                SQLiteDataReader beersReader = beersCommand.ExecuteReader();
+                if (beersReader.HasRows)
+                {
+                    while (beersReader.Read())
+                    {
+                        beerNameComboBox.Items.Add(beersReader.GetString(0));
+                    }
+                }
+                beersReader.Dispose();
+            }
+        }
+
+        private void InitializeVintageComboBox()
+        {
+            string vintageQuery = "select distinct Vintage from BeerInventory";
+            using (SQLiteCommand vintageCommand = new SQLiteCommand(vintageQuery, databaseConnection))
+            {
+                SQLiteDataReader vintageReader = vintageCommand.ExecuteReader();
+                if (vintageReader.HasRows)
+                {
+                    while (vintageReader.Read())
+                    {
+                        vintageComboBox.Items.Add(vintageReader.GetInt32(0));
+                    }
+                }
+                vintageReader.Dispose();
+            }
+        }
+
+        private void InitializeBeerStyleComboBox()
+        {
+            string beerStyleQuery = "select distinct BeerStyle from BeerInventory";
+            using (SQLiteCommand beerStyleCommand = new SQLiteCommand(beerStyleQuery, databaseConnection))
+            {
+                SQLiteDataReader beerStyleReader = beerStyleCommand.ExecuteReader();
+                if (beerStyleReader.HasRows)
+                {
+                    while (beerStyleReader.Read())
+                    {
+                        beerStyleComboBox.Items.Add(beerStyleReader.GetString(0));
+                    }
+                }
+                beerStyleReader.Dispose();
+            }
         }
     }
 }
